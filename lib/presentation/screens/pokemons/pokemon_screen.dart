@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/domian/entities/pokemon_info.dart';
 import 'package:pokedex/presentation/providers/pokemon_info_provider.dart';
+import 'package:pokedex/presentation/widgets/widgets.dart';
 
 class PokemonScreen extends ConsumerStatefulWidget {
   static String name = 'pokemon_creen';
@@ -32,7 +33,7 @@ class PokemonScreenState extends ConsumerState<PokemonScreen> {
     }
 
     return DefaultTabController(
-        length: 4,
+        length: 2,
         child: SafeArea(
           top: false,
           child: Scaffold(
@@ -71,12 +72,6 @@ class PokemonScreenState extends ConsumerState<PokemonScreen> {
                             Tab(
                               child: Text('Base Stats'),
                             ),
-                            Tab(
-                              child: Text('Evolution'),
-                            ),
-                            Tab(
-                              child: Text('Moves'),
-                            ),
                           ]),
                     ),
                   ),
@@ -84,32 +79,8 @@ class PokemonScreenState extends ConsumerState<PokemonScreen> {
                     child: Container(
                       color: Colors.white,
                       child: TabBarView(children: [
-                        SingleChildScrollView(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 35, vertical: 10),
-                            child: Column(children: [
-                              Row(
-                                children: [
-                                  const Text(
-                                    'Height',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  const SizedBox(
-                                    width: 50,
-                                  ),
-                                  Text('${pokemon.height} cm',
-                                      style: const TextStyle(fontSize: 16)),
-                                ],
-                              ),
-                            ]),
-                          ),
-                        ),
-                        const Icon(Icons.directions_transit),
-                        const Icon(Icons.directions_bike),
-                        const Icon(Icons.directions_bike),
+                        TabAboutPokemonScreen(pokemon: pokemon),
+                        TabBaseStatsPokemonScreen(pokemon: pokemon)
                       ]),
                     ),
                   )
@@ -145,21 +116,7 @@ class _PokemonView extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  Row(
-                      children: pokemon.types
-                          .map((e) => Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 3),
-                                child: Chip(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                    ),
-                                    label: Text(e.type.name),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15))),
-                              ))
-                          .toList())
+                  _PokemonTypes(pokemon: pokemon)
                 ],
               ),
               Text('#${pokemon.order}',
@@ -170,6 +127,7 @@ class _PokemonView extends StatelessWidget {
             ],
           ),
         ),
+        //* imagen
         Center(
           child: Image.network(
             pokemon.sprites.frontDefault,
@@ -179,5 +137,32 @@ class _PokemonView extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+class _PokemonTypes extends StatelessWidget {
+  const _PokemonTypes({
+    required this.pokemon,
+  });
+
+  final PokemonInfo pokemon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        children: pokemon.types
+            .map((e) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3),
+                  child: Chip(
+                      visualDensity: VisualDensity.compact,
+                      backgroundColor: const Color.fromARGB(255, 249, 183, 91),
+                      label: Text(
+                        e.type.name,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ))
+            .toList());
   }
 }

@@ -11,6 +11,12 @@ class PokemonInfoMapper {
           isDefault: pokemon.isDefault,
           name: pokemon.name,
           order: pokemon.order,
+          abilities: pokemon.abilities
+              .map((e) => Ability(
+                  ability: Species(name: e.ability.name, url: e.ability.url),
+                  isHidden: e.isHidden,
+                  slot: e.slot))
+              .toList(),
           sprites: Sprites(
               backDefault: pokemon.sprites.backDefault,
               backFemale: pokemon.sprites.backFemale,

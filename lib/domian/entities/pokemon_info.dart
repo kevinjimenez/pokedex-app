@@ -1,4 +1,5 @@
 class PokemonInfo {
+  final List<Ability> abilities;
   final int baseExperience;
   final int height;
   final int id;
@@ -10,6 +11,7 @@ class PokemonInfo {
   final int weight;
 
   PokemonInfo({
+    required this.abilities,
     required this.baseExperience,
     required this.height,
     required this.id,
@@ -19,6 +21,18 @@ class PokemonInfo {
     required this.sprites,
     required this.types,
     required this.weight,
+  });
+}
+
+class Ability {
+  final Species ability;
+  final bool isHidden;
+  final int slot;
+
+  Ability({
+    required this.ability,
+    required this.isHidden,
+    required this.slot,
   });
 }
 
@@ -73,8 +87,7 @@ class Species {
     required this.url,
   });
 
-  factory Species.fromJson(Map<String, dynamic> json) =>
-      Species(
+  factory Species.fromJson(Map<String, dynamic> json) => Species(
         name: json["name"],
         url: json["url"],
       );

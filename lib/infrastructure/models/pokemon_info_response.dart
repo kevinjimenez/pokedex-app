@@ -1,4 +1,5 @@
 class PokemonInfoResponse {
+  final List<AbilityResponse> abilities;
   final int baseExperience;
   final int height;
   final int id;
@@ -10,6 +11,7 @@ class PokemonInfoResponse {
   final int weight;
 
   PokemonInfoResponse({
+    required this.abilities,
     required this.baseExperience,
     required this.height,
     required this.id,
@@ -23,6 +25,8 @@ class PokemonInfoResponse {
 
   factory PokemonInfoResponse.fromJson(Map<String, dynamic> json) =>
       PokemonInfoResponse(
+        abilities: List<AbilityResponse>.from(
+            json["abilities"].map((x) => AbilityResponse.fromJson(x))),
         baseExperience: json["base_experience"],
         height: json["height"],
         id: json["id"],
@@ -30,11 +34,13 @@ class PokemonInfoResponse {
         name: json["name"],
         order: json["order"],
         sprites: SpritesResponse.fromJson(json["sprites"]),
-        types: List<TypeResponse>.from(json["types"].map((x) => TypeResponse.fromJson(x))),
+        types: List<TypeResponse>.from(
+            json["types"].map((x) => TypeResponse.fromJson(x))),
         weight: json["weight"],
       );
 
   Map<String, dynamic> toJson() => {
+        "abilities": List<dynamic>.from(abilities.map((x) => x.toJson())),
         "base_experience": baseExperience,
         "height": height,
         "id": id,
@@ -44,6 +50,31 @@ class PokemonInfoResponse {
         "sprites": sprites.toJson(),
         "types": List<dynamic>.from(types.map((x) => x.toJson())),
         "weight": weight,
+      };
+}
+
+class AbilityResponse {
+  final SpeciesResponse ability;
+  final bool isHidden;
+  final int slot;
+
+  AbilityResponse({
+    required this.ability,
+    required this.isHidden,
+    required this.slot,
+  });
+
+  factory AbilityResponse.fromJson(Map<String, dynamic> json) =>
+      AbilityResponse(
+        ability: SpeciesResponse.fromJson(json["ability"]),
+        isHidden: json["is_hidden"],
+        slot: json["slot"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ability": ability.toJson(),
+        "is_hidden": isHidden,
+        "slot": slot,
       };
 }
 
