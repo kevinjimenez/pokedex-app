@@ -3,7 +3,8 @@ import 'package:pokedex/domian/entities/pokemon_info.dart';
 
 class TabAboutPokemonScreen extends StatelessWidget {
   final PokemonInfo pokemon;
-  const TabAboutPokemonScreen({Key? key, required this.pokemon}) : super(key: key);
+  const TabAboutPokemonScreen({Key? key, required this.pokemon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +12,10 @@ class TabAboutPokemonScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
         child: Column(children: [
+          const SizedBox(
+            height: 10,
+          ),
+          _PokemonDetails(label: 'Species', text: pokemon.species.name),
           const SizedBox(
             height: 10,
           ),
@@ -48,24 +53,13 @@ class _PokemonDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          label,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(
-          width: 50,
-        ),
-        Flexible(
-          child: Text(
-            text,
-            style: const TextStyle(fontSize: 16),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ],
+    return ListTile(
+      leading: const Icon(Icons.star_outlined, color: Colors.amber),
+      title: Text(
+        label,
+        style: const TextStyle(fontWeight: FontWeight.w500),
+      ),
+      subtitle: Text(text),
     );
   }
 }

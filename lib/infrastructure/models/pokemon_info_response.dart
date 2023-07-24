@@ -6,8 +6,10 @@ class PokemonInfoResponse {
   final bool isDefault;
   final String name;
   final int order;
+  final SpeciesResponse species;
   final SpritesResponse sprites;
   final List<TypeResponse> types;
+  final List<StatResponse> stats;
   final int weight;
 
   PokemonInfoResponse({
@@ -18,8 +20,10 @@ class PokemonInfoResponse {
     required this.isDefault,
     required this.name,
     required this.order,
+    required this.species,
     required this.sprites,
     required this.types,
+    required this.stats,
     required this.weight,
   });
 
@@ -33,9 +37,11 @@ class PokemonInfoResponse {
         isDefault: json["is_default"],
         name: json["name"],
         order: json["order"],
+        species: SpeciesResponse.fromJson(json["species"]),
         sprites: SpritesResponse.fromJson(json["sprites"]),
         types: List<TypeResponse>.from(
             json["types"].map((x) => TypeResponse.fromJson(x))),
+        stats: List<StatResponse>.from(json["stats"].map((x) => StatResponse.fromJson(x))),
         weight: json["weight"],
       );
 
@@ -49,6 +55,7 @@ class PokemonInfoResponse {
         "order": order,
         "sprites": sprites.toJson(),
         "types": List<dynamic>.from(types.map((x) => x.toJson())),
+        "stats": List<dynamic>.from(stats.map((x) => x.toJson())),
         "weight": weight,
       };
 }
@@ -161,5 +168,29 @@ class SpeciesResponse {
   Map<String, dynamic> toJson() => {
         "name": name,
         "url": url,
+      };
+}
+
+class StatResponse {
+  final int baseStat;
+  final int effort;
+  final SpeciesResponse stat;
+
+  StatResponse({
+    required this.baseStat,
+    required this.effort,
+    required this.stat,
+  });
+
+  factory StatResponse.fromJson(Map<String, dynamic> json) => StatResponse(
+        baseStat: json["base_stat"],
+        effort: json["effort"],
+        stat: SpeciesResponse.fromJson(json["stat"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "base_stat": baseStat,
+        "effort": effort,
+        "stat": stat.toJson(),
       };
 }

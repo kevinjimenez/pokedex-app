@@ -11,6 +11,14 @@ class PokemonInfoMapper {
           isDefault: pokemon.isDefault,
           name: pokemon.name,
           order: pokemon.order,
+          stats: pokemon.stats
+              .map((e) => Stat(
+                  baseStat: e.baseStat,
+                  effort: e.effort,
+                  stat: Species(name: e.stat.name, url: e.stat.url)))
+              .toList(),
+          species:
+              Species(name: pokemon.species.name, url: pokemon.species.url),
           abilities: pokemon.abilities
               .map((e) => Ability(
                   ability: Species(name: e.ability.name, url: e.ability.url),

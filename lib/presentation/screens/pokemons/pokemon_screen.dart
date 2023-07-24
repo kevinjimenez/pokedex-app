@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/config/helpers/capitalize_case.dart';
 import 'package:pokedex/domian/entities/pokemon_info.dart';
 import 'package:pokedex/presentation/providers/pokemon_info_provider.dart';
 import 'package:pokedex/presentation/widgets/widgets.dart';
@@ -110,7 +111,7 @@ class _PokemonView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    pokemon.name,
+                    CapitalizeCase.titleCase(pokemon.name),
                     style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.w500,

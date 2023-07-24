@@ -6,8 +6,10 @@ class PokemonInfo {
   final bool isDefault;
   final String name;
   final int order;
+  final Species species;
   final Sprites sprites;
   final List<Type> types;
+  final List<Stat> stats;
   final int weight;
 
   PokemonInfo({
@@ -18,8 +20,10 @@ class PokemonInfo {
     required this.isDefault,
     required this.name,
     required this.order,
+    required this.species,
     required this.sprites,
     required this.types,
+    required this.stats,
     required this.weight,
   });
 }
@@ -66,16 +70,6 @@ class Type {
     required this.slot,
     required this.type,
   });
-
-  factory Type.fromJson(Map<String, dynamic> json) => Type(
-        slot: json["slot"],
-        type: Species.fromJson(json["type"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "slot": slot,
-        "type": type.toJson(),
-      };
 }
 
 class Species {
@@ -86,14 +80,16 @@ class Species {
     required this.name,
     required this.url,
   });
+}
 
-  factory Species.fromJson(Map<String, dynamic> json) => Species(
-        name: json["name"],
-        url: json["url"],
-      );
+class Stat {
+  final int baseStat;
+  final int effort;
+  final Species stat;
 
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "url": url,
-      };
+  Stat({
+    required this.baseStat,
+    required this.effort,
+    required this.stat,
+  });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pokedex/config/helpers/capitalize_case.dart';
 import 'package:pokedex/domian/entities/pokemon.dart';
 
 class ItemPokemon extends StatelessWidget {
@@ -51,7 +52,7 @@ class _PokemonName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      pokemon.name,
+      CapitalizeCase.titleCase(pokemon.name),
       style: const TextStyle(fontSize: 18, color: Colors.white),
     );
   }
