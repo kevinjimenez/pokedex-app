@@ -1,1 +1,0 @@
-export 'pokemons_response.dart';

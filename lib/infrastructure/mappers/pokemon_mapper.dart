@@ -1,6 +1,7 @@
 import 'package:pokedex/domian/entities/pokemon.dart';
-import 'package:pokedex/infrastructure/models/models.dart';
+import 'package:pokedex/infrastructure/models/pokemons_response.dart';
 
-class PokemonMapper {
-  static Pokemon pokemonDbToEntity( PokemonDb pokemon ) => Pokemon(name: pokemon.name);
+class PokemonsMapper {
+  static Pokemon pokemonDbToEntity(PokemonResonse pokemon) =>
+      Pokemon(name: pokemon.name);
 }

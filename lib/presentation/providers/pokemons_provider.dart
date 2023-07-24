@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pokedex/domian/entities/entities.dart';
+import 'package:pokedex/domian/entities/pokemon.dart';
 import 'package:pokedex/presentation/providers/pokemons_repository_provider.dart';
 
 final getPokemonsProvider =

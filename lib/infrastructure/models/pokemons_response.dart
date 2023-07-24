@@ -2,7 +2,7 @@ class PokemonsResponse {
     final int count;
     final String next;
     final dynamic previous;
-    final List<PokemonDb> results;
+    final List<PokemonResonse> results;
 
     PokemonsResponse({
         required this.count,
@@ -15,7 +15,7 @@ class PokemonsResponse {
         count: json["count"],
         next: json["next"],
         previous: json["previous"],
-        results: List<PokemonDb>.from(json["results"].map((x) => PokemonDb.fromJson(x))),
+        results: List<PokemonResonse>.from(json["results"].map((x) => PokemonResonse.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -26,16 +26,16 @@ class PokemonsResponse {
     };
 }
 
-class PokemonDb {
+class PokemonResonse {
     final String name;
     final String url;
 
-    PokemonDb({
+    PokemonResonse({
         required this.name,
         required this.url,
     });
 
-    factory PokemonDb.fromJson(Map<String, dynamic> json) => PokemonDb(
+    factory PokemonResonse.fromJson(Map<String, dynamic> json) => PokemonResonse(
         name: json["name"],
         url: json["url"],
     );
