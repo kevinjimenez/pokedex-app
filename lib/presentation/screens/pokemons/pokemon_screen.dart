@@ -34,42 +34,88 @@ class PokemonScreenState extends ConsumerState<PokemonScreen> {
     return DefaultTabController(
         length: 4,
         child: SafeArea(
+          top: false,
           child: Scaffold(
             appBar: AppBar(
+              iconTheme: const IconThemeData(color: Colors.white),
+              backgroundColor: Colors.orange,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.favorite_border),
+                  icon: const Icon(
+                    Icons.favorite_border,
+                  ),
                   onPressed: () {},
                 )
               ],
             ),
-            body: Column(
-              children: [
-                _PokemonView(pokemon: pokemon),
-                const TabBar(tabs: [
-                  Tab(
-                    child: Text('About'),
+            body: Stack(children: [
+              Container(
+                color: Colors.orange,
+              ),
+              Column(
+                children: [
+                  _PokemonView(pokemon: pokemon),
+                  //* tabs
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                    child: Container(
+                      color: Colors.white,
+                      child: const TabBar(
+                          padding: EdgeInsets.only(top: 20),
+                          tabs: [
+                            Tab(
+                              child: Text('About'),
+                            ),
+                            Tab(
+                              child: Text('Base Stats'),
+                            ),
+                            Tab(
+                              child: Text('Evolution'),
+                            ),
+                            Tab(
+                              child: Text('Moves'),
+                            ),
+                          ]),
+                    ),
                   ),
-                  Tab(
-                    child: Text('Base Stats'),
-                  ),
-                  Tab(
-                    child: Text('Evolution'),
-                  ),
-                  Tab(
-                    child: Text('Moves'),
-                  ),
-                ]),
-                Expanded(
-                  child: TabBarView(children: [
-                    Text('${pokemon.baseExperience}'),
-                    const Icon(Icons.directions_transit),
-                    const Icon(Icons.directions_bike),
-                    const Icon(Icons.directions_bike),
-                  ]),
-                )
-              ],
-            ),
+                  Expanded(
+                    child: Container(
+                      color: Colors.white,
+                      child: TabBarView(children: [
+                        SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 35, vertical: 10),
+                            child: Column(children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    'Height',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  const SizedBox(
+                                    width: 50,
+                                  ),
+                                  Text('${pokemon.height} cm',
+                                      style: const TextStyle(fontSize: 16)),
+                                ],
+                              ),
+                            ]),
+                          ),
+                        ),
+                        const Icon(Icons.directions_transit),
+                        const Icon(Icons.directions_bike),
+                        const Icon(Icons.directions_bike),
+                      ]),
+                    ),
+                  )
+                ],
+              ),
+            ]),
           ),
         ));
   }
@@ -94,20 +140,33 @@ class _PokemonView extends StatelessWidget {
                 children: [
                   Text(
                     pokemon.name,
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
                   ),
                   Row(
-                    children: [
-                      Chip(
-                          label: const Text('type'),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                    ],
-                  )
+                      children: pokemon.types
+                          .map((e) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 3),
+                                child: Chip(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                    ),
+                                    label: Text(e.type.name),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15))),
+                              ))
+                          .toList())
                 ],
               ),
               Text('#${pokemon.order}',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white))
             ],
           ),
         ),
