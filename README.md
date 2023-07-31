@@ -1,16 +1,9 @@
 # pokedex
+Aplicación de vista de pokemones la cual usa la api (PokeApi) para poder vidualizar 150 pokemons con un infite scroll y el uso de riverpod
 
-A new Flutter project.
+<img src="demo/list-pokemons.png" alt="Pokemons" width="200"/>
+<img src="demo/pokemon-about.png" alt="About" width="200"/>
+<img src="demo/pokemon-stats.png" alt="Stat" width="200"/>
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Stack
+- Flutter
