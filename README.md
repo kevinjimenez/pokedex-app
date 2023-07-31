@@ -6,4 +6,5 @@ Aplicación de vista de pokemones la cual usa la api (PokeApi) para poder vidual
 <img src="demo/pokemon-stats.png" alt="Stat" width="200"/>
 
 ## Stack
-- Flutter
+- Flutter (3.10.5)
+- Dart (3.0.5)
